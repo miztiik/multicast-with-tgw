@@ -1,5 +1,7 @@
 {
   "app": "python3 app.py",
+  "versionReporting": false,
+  "requireApproval": "never",
   "watch": {
     "include": [
       "**"
@@ -15,17 +17,29 @@
     ]
   },
   "context": {
-    "@aws-cdk/aws-apigateway:usagePlanKeyOrderInsensitiveId": true,
-    "@aws-cdk/core:stackRelativeExports": true,
-    "@aws-cdk/aws-rds:lowercaseDbIdentifier": true,
-    "@aws-cdk/aws-lambda:recognizeVersionProps": true,
-    "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": true,
-    "@aws-cdk-containers/ecs-service-extensions:enableDefaultLogDriver": true,
-    "@aws-cdk/aws-ec2:uniqueImdsv2TemplateName": true,
-    "@aws-cdk/aws-iam:minimizePolicies": true,
-    "@aws-cdk/core:target-partitions": [
-      "aws",
-      "aws-cn"
+    "project": "multicast-with-tgw",
+    "tags": [
+      { "owner": "Mystique" },
+      { "github_profile": "https://github.com/miztiik" },
+      { "about_me": "https://github.com/miztiik/about-me" },
+      { "youtube_profile": "https://youtube.com/c/valaxytechnologies" },
+      { "udemy_profile": "https://www.udemy.com/user/n-kumar" },
+      {
+        "skill_profile": "https://www.skillshare.com/r/profile/Kumar/407603333"
+      },
+      { "buy_me_a_coffee": "https://ko-fi.com/miztiik" },
+      {
+        "learn_aws_advanced_security": "https://www.udemy.com/course/aws-cloud-security-proactive-way"
+      },
+      {
+        "learn_aws_cdk": "https://www.udemy.com/course/aws-cloud-development-kit-from-beginner-to-professional"
+      },
+      { "project": "multicast-with-tgw" },
+      {
+        "github_repo_url": "https://github.com/miztiik/multicast-with-tgw"
+      }
     ]
   }
 }
+
+
