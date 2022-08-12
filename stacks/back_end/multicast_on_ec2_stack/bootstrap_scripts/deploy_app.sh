@@ -44,13 +44,6 @@ unassume_role() {
   unset AWS_SESSION_TOKEN
 }
 
-function clone_git_repo(){
-    install_libs
-    # mkdir -p /var/
-    cd /var
-    git clone $GIT_REPO_URL
-
-}
 
 function add_env_vars(){
     EC2_AVAIL_ZONE=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
@@ -64,9 +57,26 @@ function add_env_vars(){
 
 function install_libs(){
     # Prepare the server for python3
-    yum -y install python-pip python3 git
+    yum -y install python-pip python3 git httpd
     yum install -y jq
     pip3 install boto3
+}
+
+function install_httpd(){
+yum install -y httpd
+    EC2_AVAIL_ZONE=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
+    EC2_INST_ID=`curl http://169.254.169.254/latest/meta-data/instance-id`
+    echo "welcome miztiikon from ${EC2_AVAIL_ZONE} - ${EC2_INST_ID}" >> /var/www/html/index.html
+    systemctl restart httpd
+    systemctl enable httpd
+}
+
+function clone_git_repo(){
+    install_libs
+    # mkdir -p /var/
+    cd /var
+    git clone $GIT_REPO_URL
+
 }
 
 function install_nodejs(){
@@ -182,14 +192,11 @@ EOF
     # cd "/opt/aws/amazon-cloudwatch-agent/logs/"
 }
 
-# Let the execution begin
-# if [ $# -eq 0 ]; then
-#   instruction
-#   exit 1
-
+add_env_vars                    | tee "${LOG_FILE}"
 install_libs                    | tee "${LOG_FILE}"
 install_cw_agent                | tee "${LOG_FILE}"
 configure_igmpv2                | tee "${LOG_FILE}"
+install_httpd                | tee "${LOG_FILE}"
 
 
 
